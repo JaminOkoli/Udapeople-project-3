@@ -17,6 +17,7 @@ commands:
             aws s3 rm s3://udapeople-<< parameters.circle_workflow_id >> --recursive
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.circle_workflow_id >>
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.circle_workflow_id >>
+            exit 1
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -152,6 +153,7 @@ jobs:
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --tags project=Udapeople \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
+            exit 1
       - run:
           name: Ensure front-end infrastructure exist
           command: |
@@ -160,6 +162,7 @@ jobs:
               --tags project=Udapeople \
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"
+            exit 1
       - run:
           name: Add back-end ip to ansible inventory
           command: |
