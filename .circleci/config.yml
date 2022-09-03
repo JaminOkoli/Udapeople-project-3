@@ -141,25 +141,25 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - run: yum -y install tar gzip
+      - run: yum install tar gzip -y
       - run:
           name: Ensure back-end infrastructure exists
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --tags project=Udapeople \
+              --tags project=udapeople \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
-            exit 1
+      #      exit 1
       - run:
           name: Ensure front-end infrastructure exist
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/frontend.yml \
-              --tags project=Udapeople \
+              --tags project=udapeople \
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"
-            exit 1
+      #      exit 1
       - run:
           name: Add back-end ip to ansible inventory
           command: |
@@ -184,7 +184,7 @@ jobs:
     docker:
       # Docker image here that supports Ansible
       - image: python:3.10-alpine3.16
-      steps:
+    steps:
       # Checkout code from git
       - checkout
       # Add ssh keys with fingerprint
@@ -207,7 +207,7 @@ jobs:
             ls -al
             ansible-playbook -i inventory.txt configure-server.yml
           no_output_timeout: 30m
-            exit 1
+      #      exit 1
       # Here's where you will add some code to rollback on failure      
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0.7}
