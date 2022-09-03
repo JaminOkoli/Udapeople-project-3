@@ -283,7 +283,7 @@ jobs:
       - destroy-environment:
           circle_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"  
       - revert-migrations: 
-          circle_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"  
+           circle_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}" 
                     
   # deploy-backend:
   #     # Docker image that supports Ansible
