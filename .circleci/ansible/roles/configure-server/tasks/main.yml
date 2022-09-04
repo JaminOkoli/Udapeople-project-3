@@ -1,20 +1,9 @@
 ---
-- name: "update local apt repo."
-  beconme: true
-  apt: 
-    update_cache: yes
-    
 - name: "upgrade packages."
   become: true
   apt:
     upgrade: "yes"
-  
-  
-- name: "remove stable deoendencies"
-  become: true
-  apt:
-  autoremove: yes
-  
+
 - name: "install dependencies."
   become: true
   apt:
@@ -26,6 +15,6 @@
   become: true
   npm:
     name: pm2
-    global: yes 
+    global: yes
     production: yes
     state: present
