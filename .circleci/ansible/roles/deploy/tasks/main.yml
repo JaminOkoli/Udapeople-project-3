@@ -10,7 +10,7 @@
     upgrade: yes
     
 - name: "remove stable dependencies"
-  beocome: true
+  become: true
   apt:
     autoremove: yes
     
