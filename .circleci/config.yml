@@ -17,7 +17,7 @@ commands:
             aws s3 rm s3://udapeople-<< parameters.circle_workflow_id >> --recursive
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.circle_workflow_id >>
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.circle_workflow_id >>
-      #      exit 1
+
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
     parameters:
@@ -283,7 +283,7 @@ jobs:
       - destroy-environment:
           circle_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"  
       - revert-migrations: 
-            circle_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}" 
+          circle_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}" 
                     
   # deploy-backend:
   #     # Docker image that supports Ansible
