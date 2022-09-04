@@ -230,7 +230,7 @@ jobs:
             sudo npm install -g npm
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
-            #exit 1
+      #      exit 1
       - run:
           name: Send migration results to kvdb.io
           command: |
